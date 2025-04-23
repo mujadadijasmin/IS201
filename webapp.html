@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hangman Game</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #d4edda; /* Light green background */
+      color: #2c6e49; /* Dark green text */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #ffffff; /* White background for the container */
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive; /* Elegant, cursive font */
+      font-size: 2.5em;
+      color: #155724; /* Deep green color */
+      margin-bottom: 20px;
+    }
+
+    #word {
+      font-size: 2.2em;
+      letter-spacing: 12px;
+      margin: 30px 0 10px;
+      display: none;
+      color: #2c6e49;
+    }
+
+    #letters {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #letters button {
+      margin: 6px;
+      padding: 10px 14px;
+      font-size: 1.2em;
+      border: 1px solid #28a745; /* Light green border */
+      background-color: #e8f5e9; /* Very light green button background */
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    #letters button:disabled {
+      background-color: #b2dfbb; /* Disabled state with lighter green */
+      color: #777;
+      cursor: default;
+    }
+
+    #letters button:hover:not(:disabled) {
+      background-color: #c8e6c9; /* Light green hover effect */
+    }
+
+    #message {
+      font-size: 1.3em;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #2d3436;
+    }
+
+    button.action-btn {
+      padding: 12px 22px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      margin: 10px 8px;
+      transition: background-color 0.2s ease;
+    }
+
+    #play {
+      background-color: #28a745; /* Green play button */
+      color: white;
+    }
+
+    #play:hover {
+      background-color: #218838; /* Darker green on hover */
+    }
+
+    #restart {
+      background-color: #4caf50; /* Medium green */
+      color: white;
+      display: none;
+    }
+
+    #restart:hover {
+      background-color: #388e3c; /* Darker green on hover */
+    }
+
+    #hint {
+      background-color: #dcedc8; /* Very light green hint button */
+      color: #388e3c;
+      display: none;
+    }
+
+    #hint:hover {
+      background-color: #c5e1a5; /* Hover effect for hint */
+    }
+
+    #hintText {
+      margin-top: 10px;
+      font-style: italic;
+      color: #388e3c; /* Dark green for hint text */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hangman Game</h1>
+    <button id="play" class="action-btn">Play</button>
+
+    <div id="game">
+      <div id="word">_ _ _ _ _</div>
+      <div id="letters"></div>
+      <button id="hint" class="action-btn">Hint</button>
+      <div id="hintText"></div>
+      <div id="message"></div>
+      <button id="restart" class="action-btn">Play Again</button>
+    </div>
+  </div>
+
+  <script>
+    const wordList = [
+      { word: "apple", hint: "A common red or green fruit" },
+      { word: "banana", hint: "A long, yellow fruit" },
+      { word: "elephant", hint: "The largest land animal" },
+      { word: "geology", hint: "The study of Earth's structure" },
+      { word: "planet", hint: "Earth is one of these" },
+      { word: "harmony", hint: "Musical agreement or peace" },
+      { word: "canyon", hint: "A deep valley with steep sides" }
+    ];
+
+    let chosenWord = "";
+    let chosenHint = "";
+    let guessedLetters = [];
+    let mistakes = 0;
+    const maxMistakes = 6;
+
+    const wordDiv = document.getElementById("word");
+    const lettersDiv = document.getElementById("letters");
+    const messageDiv = document.getElementById("message");
+    const restartBtn = document.getElementById("restart");
+    const playBtn = document.getElementById("play");
+    const hintBtn = document.getElementById("hint");
+    const hintText = document.getElementById("hintText");
+    const gameDiv = document.getElementById("game");
+
+    gameDiv.style.display = "none";
+
+    function chooseWord() {
+      const random = wordList[Math.floor(Math.random() * wordList.length)];
+      chosenWord = random.word.toLowerCase();
+      chosenHint = random.hint;
+    }
+
+    function displayWord() {
+      const display = chosenWord.split("").map(letter =>
+        guessedLetters.includes(letter) ? letter : "_"
+      ).join(" ");
+      wordDiv.textContent = display;
+    }
+
+    function checkGameStatus() {
+      if (!wordDiv.textContent.includes("_")) {
+        messageDiv.textContent = "🎉 You won!";
+        endGame();
+      } else if (mistakes >= maxMistakes) {
+        messageDiv.textContent = `💀 You lost! The word was "${chosenWord}".`;
+        endGame();
+      }
+    }
+
+    function endGame() {
+      document.querySelectorAll("#letters button").forEach(btn => btn.disabled = true);
+      restartBtn.style.display = "inline-block";
+      hintBtn.style.display = "none";
+    }
+
+    function createLetterButtons() {
+      lettersDiv.innerHTML = "";
+      for (let i = 65; i <= 90; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = String.fromCharCode(i);
+        btn.addEventListener("click", () => handleGuess(btn));
+        lettersDiv.appendChild(btn);
+      }
+    }
+
+    function handleGuess(button) {
+      const letter = button.textContent.toLowerCase();
+      button.disabled = true;
+
+      if (chosenWord.includes(letter)) {
+        guessedLetters.push(letter);
+      } else {
+        mistakes++;
+      }
+
+      displayWord();
+      checkGameStatus();
+    }
+
+    function restartGame() {
+      guessedLetters = [];
+      mistakes = 0;
+      messageDiv.textContent = "";
+      hintText.textContent = "";
+      restartBtn.style.display = "none";
+      hintBtn.style.display = "inline-block";
+      chooseWord();
+      createLetterButtons();
+      displayWord();
+      wordDiv.style.display = "block";
+      lettersDiv.style.display = "block";
+    }
+
+    playBtn.addEventListener("click", () => {
+      playBtn.style.display = "none";
+      gameDiv.style.display = "block";
+      restartGame();
+    });
+
+    restartBtn.addEventListener("click", restartGame);
+
+    hintBtn.addEventListener("click", () => {
+      hintText.textContent = `💡 Hint: ${chosenHint}`;
+    });
+  </script>
+</body>
+</html>
+
+

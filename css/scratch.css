@@ -1,0 +1,213 @@
+.common{
+        text-align: center;
+        font-family: cursive;
+}
+* {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+.header {
+        background-image: url('your-image.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 500px;
+        line-height: 500px;
+        
+        font-size: 35px; /* Try a specific size instead of x-large */
+        font-weight: bold; /* Corrected from font-style */
+        color: #b76e79;
+        text-align: center; /* Optional: center your text */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds contrast */
+      }
+/* .mainbody{
+        background-color: rgb(189, 27, 54);
+
+} */
+nav{
+        background-color: lightgray;
+        padding: 10px;
+        overflow: hidden;
+}
+nav a{
+        color: #333;
+        text-decoration: none;
+        padding: 15px;
+        font-weight: bold;
+}
+nav a:hover{
+        background-color: #ccc;
+
+}
+
+body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Georgia', serif;
+        /* background-image: url('floral-background.jpg'); Replace with your image */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      
+.weddinglist {
+        background-color: rgba(240, 220, 220, 0.85);
+        max-width: 700px;
+        margin: 5rem auto;
+        padding: 2rem 3rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        color: #3e3e3e;
+        line-height: 1.6;
+      }
+      
+.weddinglist h2 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 36px;
+        color: #b76e79;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+      
+      .weddinglist ol,
+      .weddinglist ul {
+        display: inline-block;
+        text-align: left;
+        padding-left: 1.2rem;
+        margin: 0 auto;
+      }
+
+.weddingwebsite {
+        background-color: rgba(255, 255, 255, 0.85); 
+        padding: 3rem 2rem; 
+        border-radius: 15px; 
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+        margin-top: 3rem;
+        text-align: center; 
+        font-family: 'Georgia', serif; 
+        color: #3e3e3e; 
+        line-height: 1.6; 
+        max-width: 800px; 
+        margin-left: auto; 
+        margin-right: auto;
+    }
+    
+.weddingwebsite h3 {
+        font-family: 'Dancing Script', cursive; 
+        font-size: 30px; 
+        color: #b76e79; 
+        margin-bottom: 1.5rem; 
+    }
+    
+.weddingwebsite p {
+        font-size: 18px; 
+        color: #5a5a5a; 
+        margin-bottom: 2rem; 
+    }
+    
+.weddingwebsite a {
+        display: inline-block;
+        text-decoration: none; 
+        padding: 10px 20px; 
+        background-color: #b76e79; 
+        color: #fff; 
+        font-weight: bold; 
+        border-radius: 10px; 
+        transition: background-color 0.3s ease;
+    }
+    
+    .weddingwebsite a:hover {
+        background-color: #a15b6c; 
+    }
+    
+.youtubevideo {
+        max-width: 700px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: 'Georgia', serif;
+        color: #3e3e3e;
+      }
+      
+.youtubevideo h3 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 30px;
+        color: #b76e79;
+        margin-bottom: 1.5rem;
+      }
+      
+.youtubevideo {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+.youtubevideo iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 10px;
+      }
+.tablaeu {
+        max-width: 600px;
+        margin: 4rem auto;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.85);  /* Soft white background */
+        padding: 3rem 2rem;
+        border-radius: 20px;  /* Rounded corners */
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);  /* Light shadow for elegance */
+        font-family: 'Georgia', serif;  /* Elegant font */
+        color: #3e3e3e;  /* Soft dark gray text color */
+      }
+      
+.tablaeu h2 {
+        font-family: 'Dancing Script', cursive;  /* Wedding font style */
+        font-size: 36px;
+        color: #b76e79;  /* Soft rose color */
+        margin-bottom: 1.5rem;
+      }
+      
+.tablaeu p {
+        font-size: 18px;
+        color: #5a5a5a;  /* Soft gray for the paragraph */
+      }
+body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Georgia', serif;
+        /* Gradient background */
+        background: linear-gradient(to bottom, rgba(241, 168, 168, 0.8), rgba(237, 207, 207, 0.8)), 
+                    url('floral-background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        text-align: center;
+    }
+#top{
+        text-decoration: underline;
+    }
+    
+.footer{
+        position: fixed;
+        background-color: #b76e79;
+        color: whitesmoke;
+        bottom: 0px;
+        left: 5px;
+        right: 5px;
+        height: 15px;
+        line-height: 15px;
+
+}
+      
+      
